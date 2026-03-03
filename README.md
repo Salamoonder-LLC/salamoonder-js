@@ -4,17 +4,17 @@ A straightforward JavaScript wrapper for Salamoonder's API, designed for easy in
 
 ## Features
 
-- 🚀 Simple and intuitive API
-- 🔧 Support for multiple captcha types:
+- Simple and intuitive API
+- Support for multiple captcha types:
   - Akamai Web Sensor
   - Akamai SBSD
   - Kasada
   - DataDome (Slider & Interstitial)
   - Incapsula/imperva
   - Twitch Public Integrity
-- 📝 Full TypeScript-like JSDoc support
-- 🧪 Comprehensive test suite
-- 🔌 Modular architecture with individual exports
+- Full TypeScript-like JSDoc support
+- Comprehensive test suite
+- Modular architecture with individual exports
 
 ## Installation
 
@@ -36,7 +36,7 @@ const client = new Salamoonder('YOUR_API_KEY');
 // Create and solve a Kasada captcha task
 const taskId = await client.task.createTask('KasadaCaptchaSolver', {
   pjs_url: 'https://example.com/script.js',
-  cd_only: false,
+  cd_only: "false",
 });
 
 // Poll for the result
@@ -57,7 +57,7 @@ const taskId = await client.task.createTask('AkamaiWebSensorSolver', {
   bmsz: 'bmsz_cookie_value',
   script: 'sensor_script_content',
   sensor_url: 'https://sensor.example.com/sensor.js',
-  count: 5,
+  count: 0,
   data: 'sensor_data',
   user_agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)...'
 });
@@ -74,7 +74,7 @@ const client = new Salamoonder('YOUR_API_KEY');
 // Kasada Captcha
 const captchaTaskId = await client.task.createTask('KasadaCaptchaSolver', {
   pjs_url: 'https://example.com/script.js',
-  cd_only: true,
+  cd_only: "false",
 });
 const captchaResult = await client.task.getTaskResult(captchaTaskId);
 
@@ -212,7 +212,7 @@ try {
   const client = new Salamoonder('YOUR_API_KEY');
   const taskId = await client.task.createTask('KasadaCaptchaSolver', {
     pjs_url: 'https://example.com/script.js',
-    cd_only: false,
+    cd_only: "false",
   });
   const result = await client.task.getTaskResult(taskId);
 } catch (error) {
