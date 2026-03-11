@@ -77,6 +77,7 @@ export class AkamaiWeb {
             'sec-fetch-dest': 'script',
             'sec-fetch-mode': 'no-cors',
         });
+        
         delete headers['upgrade-insecure-requests'];
         delete headers['sec-fetch-user'];
         delete headers['priority'];
