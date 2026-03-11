@@ -67,8 +67,8 @@ export class Kasada {
         logger.info('Fetching fingerprint endpoint...');
         const resp = await this.client.get(fingerprintUrl, { headers, proxy, verify: false, impersonate: 'chrome133a' });
 
-        if (resp.statusCode !== 429) {
-            logger.warning('Expected 429 status code, got %d', resp.statusCode);
+        if (resp.statusCode !== 429 && resp.statusCode !== 200) {
+            logger.warning('Expected 429 or 200 status code, got %d', resp.statusCode);
             return null;
         }
 

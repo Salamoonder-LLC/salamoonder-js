@@ -1,6 +1,6 @@
 {
   "name": "salamoonder-js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A straightforward JS wrapper for Salamoonder's API, designed for easy integration and usage.",
   "type": "module",
   "main": "index.js",
