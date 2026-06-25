@@ -92,18 +92,33 @@ const payloadResult = await client.task.getTaskResult(payloadTaskId);
 ```javascript
 const client = new Salamoonder('YOUR_API_KEY');
 
+const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36';
+
 // Slider captcha
+const sliderChallenge = await client.datadome.getSliderChallenge(
+  response.text,
+  'your_dd_cookie',
+  'https://example.com/page',
+  { user_agent: ua }
+);
 const sliderTaskId = await client.task.createTask('DataDomeSliderSolver', {
-  captcha_url: 'https://captcha.example.com/slider',
-  country_code: 'US',
-  user_agent: 'Mozilla/5.0...'
+  captcha_url: sliderChallenge.captcha_url,
+  challenge_page: sliderChallenge.challenge_page,
+  user_agent: ua,
 });
 const sliderResult = await client.task.getTaskResult(sliderTaskId);
 
 // Interstitial captcha
+const interstitialChallenge = await client.datadome.getInterstitialChallenge(
+  response.text,
+  'your_dd_cookie',
+  'https://example.com/page',
+  { user_agent: ua }
+);
 const interstitialTaskId = await client.task.createTask('DataDomeInterstitialSolver', {
-  captcha_url: 'https://captcha.example.com/interstitial',
-  country_code: 'US'
+  captcha_url: interstitialChallenge.captcha_url,
+  challenge_page: interstitialChallenge.challenge_page,
+  user_agent: ua,
 });
 const interstitialResult = await client.task.getTaskResult(interstitialTaskId);
 ```

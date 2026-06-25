@@ -8,7 +8,7 @@ export class Datadome {
         this.client = client;
     }
 
-    parseSliderUrl(html, datadomeCoookie, referer) {
+    async getSliderChallenge(html, datadomeCoookie, referer, { headers = {}, user_agent } = {}) {
         logger.info('Parsing DataDome slider URL from HTML');
         try {
             const parsed = JSON.parse(html.split('var dd=')[1].split('</script>')[0].replace(/'/g, '"'));
@@ -30,14 +30,21 @@ export class Datadome {
                 dm: 'cd',
             })}`;
             logger.info('Constructed slider URL: %s', captchaUrl.substring(0, 80) + '...');
-            return captchaUrl;
+
+            const requestHeaders = user_agent
+                ? { 'User-Agent': user_agent, ...headers }
+                : { ...headers };
+            const response = await this.client.get(captchaUrl, { headers: requestHeaders });
+            const challengePage = Buffer.from(response.body).toString('base64');
+
+            return { captcha_url: captchaUrl, challenge_page: challengePage };
         } catch (e) {
             logger.error('Failed to parse object: %s', e);
             throw new Error('Failed to parse object.');
         }
     }
 
-    parseInterstitialUrl(html, datadomeCoookie, referer) {
+    async getInterstitialChallenge(html, datadomeCoookie, referer, { headers = {}, user_agent } = {}) {
         logger.info('Parsing DataDome interstitial URL from HTML');
         try {
             const parsed = JSON.parse(html.split('var dd=')[1].split('</script>')[0].replace(/'/g, '"'));
@@ -54,7 +61,14 @@ export class Datadome {
                 dm: 'cd',
             })}`;
             logger.info('Constructed interstitial URL: %s', interstitialUrl.substring(0, 80) + '...');
-            return interstitialUrl;
+
+            const requestHeaders = user_agent
+                ? { 'User-Agent': user_agent, ...headers }
+                : { ...headers };
+            const response = await this.client.get(interstitialUrl, { headers: requestHeaders });
+            const challengePage = Buffer.from(response.body).toString('base64');
+
+            return { captcha_url: interstitialUrl, challenge_page: challengePage };
         } catch (e) {
             logger.error('Failed to parse object: %s', e);
             throw new Error('Failed to parse object.');

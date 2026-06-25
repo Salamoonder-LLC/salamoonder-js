@@ -16,7 +16,7 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
-    "tlsclientwrapper": "*"
+    "tlsclientwrapper": "^4.2.0"
   },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",

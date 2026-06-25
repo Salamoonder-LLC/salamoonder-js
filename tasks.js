@@ -11,8 +11,8 @@ const TASK_FIELD_MAP = {
     IncapsulaUTMVCSolver: { required: { website: 'website' }, optional: ['user_agent'] },
     AkamaiWebSensorSolver: { required: { url: 'url', abck: 'abck', bmsz: 'bmsz', script: 'script', sensor_url: 'sensor_url', count: 'count', data: 'data' }, optional: ['user_agent'] },
     AkamaiSBSDSolver: { required: { url: 'url', cookie: 'cookie', sbsd_url: 'sbsd_url', script: 'script' }, optional: ['user_agent'] },
-    DataDomeSliderSolver: { required: { captcha_url: 'captcha_url', country_code: 'country_code' }, optional: ['user_agent'] },
-    DataDomeInterstitialSolver: { required: { captcha_url: 'captcha_url', country_code: 'country_code' }, optional: ['user_agent'] },
+    DataDomeSliderSolver: { required: { captcha_url: 'captcha_url', challenge_page: 'challenge_page', user_agent: 'user_agent' } },
+    DataDomeInterstitialSolver: { required: { captcha_url: 'captcha_url', challenge_page: 'challenge_page', user_agent: 'user_agent' } },
 };
 
 export class Tasks {
